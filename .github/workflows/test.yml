@@ -64,11 +64,11 @@ jobs:
       max-parallel: 4
       matrix:
         python-version:
-          - 3.6
-          - 3.7
           - 3.8
+          - 3.9
+          - 3.10
         salt-version:
-          - 3002.6
+          - 3005.1
 
     steps:
     - uses: actions/checkout@v2
@@ -184,10 +184,11 @@ jobs:
       max-parallel: 3
       matrix:
         python-version:
-          - 3.6
-          - 3.7
+          - 3.8
+          - 3.9
+          - 3.10
         salt-version:
-          - 3002.6
+          - 3005.1
 
     steps:
     - uses: actions/checkout@v2
@@ -298,7 +299,7 @@ jobs:
         path: artifacts/runtests-*.log
 
   macOS:
-    runs-on: macOS-latest
+    runs-on: macos-latest
     needs: Pre-Commit
 
     timeout-minutes: 40
@@ -308,10 +309,11 @@ jobs:
       max-parallel: 3
       matrix:
         python-version:
-          - 3.6
-          - 3.7
+          - 3.8
+          - 3.9
+          - 3.10
         salt-version:
-          - 3002.6
+          - 3005.1
 
     steps:
     - uses: actions/checkout@v2
