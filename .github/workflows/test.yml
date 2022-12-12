@@ -71,7 +71,8 @@ jobs:
       if: always()
       id: codecov-flags
       run: |
-        echo "FLAGS=$(python -c '"'import sys; print('{},{},salt_{}'.format('${{ runner.os }}'.replace('-latest', ''), 'py{}{}'.format(*sys.version_info), '_'.join(str(v) for v in '${{ matrix.salt-version }}'.replace('==', '_').split('.'))))'"')" > $GITHUB_OUTPUT
+        set DATA=$(python -c "import sys; print('{},{},salt_{}'.format('${{ runner.os }}'.replace('-latest', ''), 'py{}{}'.format(*sys.version_info), '_'.join(str(v) for v in '${{ matrix.salt-version }}'.replace('==', '_').split('.'))))")
+        echo "FLAGS=${DATA}" >> $GITHUB_OUTPUT
 
     - name: Upload Project Code Coverage
       if: always()
