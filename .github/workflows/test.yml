@@ -18,7 +18,7 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y libxml2 libxml2-dev libxslt-dev
-    - uses: actions/cache@v1
+    - uses: actions/cache@v3
       with:
         path: ~/.cache/pre-commit
         key: pre-commit|${{ env.PY }}|${{ hashFiles('.pre-commit-config.yaml') }}
@@ -45,7 +45,7 @@ jobs:
     - uses: actions/checkout@v3
 
     - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v1
+      uses: actions/setup-python@v3
       with:
         python-version: ${{ matrix.python-version }}
 
@@ -71,7 +71,7 @@ jobs:
       if: always()
       id: codecov-flags
       run: |
-        echo ::set-output name=flags::$(python -c "import sys; print('{},{},salt_{}'.format('${{ runner.os }}'.replace('-latest', ''), 'py{}{}'.format(*sys.version_info), '_'.join(str(v) for v in '${{ matrix.salt-version }}'.replace('==', '_').split('.'))))")
+        echo "FLAGS=$(python -c '"'import sys; print('{},{},salt_{}'.format('${{ runner.os }}'.replace('-latest', ''), 'py{}{}'.format(*sys.version_info), '_'.join(str(v) for v in '${{ matrix.salt-version }}'.replace('==', '_').split('.'))))'"')" > $GITHUB_OUTPUT
 
     - name: Upload Project Code Coverage
       if: always()
