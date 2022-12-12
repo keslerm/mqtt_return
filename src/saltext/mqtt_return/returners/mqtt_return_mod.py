@@ -14,8 +14,6 @@ __virtualname__ = "mqtt_return"
 
 
 def __virtual__():
-    # To force a module not to load return something like:
-    #   return (False, "The mqtt_return returner module is not implemented yet")
     return __virtualname__
 
 
