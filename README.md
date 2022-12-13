@@ -38,7 +38,7 @@ To get started with your new project:
 For publishing to a standard MQTT broker
 
 ```yaml
-event_return: [mqtt]
+event_return: [mqtt_return]
 
 returner.mqtt.output: mqtt
 
@@ -50,11 +50,11 @@ returner.mqtt.topic_prefix: "example/prefix"
 For publishing to AWS IoT Core MQTT broker
 
 ```yaml
-event_return: [mqtt]
+event_return: [mqtt_return]
 
 returner.mqtt.output: awsiot
 
-returner.mqtt.endpoint: example.iot.amazonaws.com
+returner.mqtt.endpoint: https://example.iot.amazonaws.com
 returner.mqtt.topic_prefix: "example/prefix"
 returner.mqtt.aws_access_key_id: "aaaaa"
 returner.mqtt.aws_secret_access_key: "aaaaa"

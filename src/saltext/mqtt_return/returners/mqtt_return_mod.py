@@ -19,15 +19,14 @@ def __virtual__():
 
 def _get_options(ret=None):
     defaults = {
-        "hostname": "localhost",
+        "endpoint": "localhost",
         "port": 1883,
         "output": "mqtt",
-        "topic_prefix": "",
         "client_id": "salt-master",
     }
 
     attrs = {
-        "hostname": "hostname",
+        "endpoint": "endpoint",
         "port": "port",
         "output": "output",
         "topic_prefix": "",
@@ -57,13 +56,17 @@ def event_return(events):
     handler = _get_handler(_options)
 
     for event in events:
-        tag = event.get("tag", "")
+        topic = event.get("tag", "")
         data = event.get("data", "")
+
+        # Add prefix if specified
+        if _options.get("topic_prefix"):
+            topic = f"{_options.get('topic_prefix')}/{topic}"
 
         try:
             handler(
                 opts=_options,
-                topic=tag,
+                topic=topic,
                 data=data,
             )
         except Exception as error:
