@@ -40,11 +40,11 @@ For publishing to a standard MQTT broker
 ```yaml
 event_return: [mqtt_return]
 
-returner.mqtt.output: mqtt
+returner.mqtt_return.output: mqtt
 
-returner.mqtt.endpoint: mqtt
-returner.mqtt.port: 1883
-returner.mqtt.topic_prefix: "example/prefix"
+returner.mqtt_return.endpoint: mqtt
+returner.mqtt_return.port: 1883
+returner.mqtt_return.topic_prefix: "example/prefix"
 ```
 
 For publishing to AWS IoT Core MQTT broker
@@ -52,10 +52,10 @@ For publishing to AWS IoT Core MQTT broker
 ```yaml
 event_return: [mqtt_return]
 
-returner.mqtt.output: awsiot
+returner.mqtt_return.output: awsiot
 
-returner.mqtt.endpoint: https://example.iot.amazonaws.com
-returner.mqtt.topic_prefix: "example/prefix"
-returner.mqtt.aws_access_key_id: "aaaaa"
-returner.mqtt.aws_secret_access_key: "aaaaa"
+returner.mqtt_return.endpoint: https://example.iot.amazonaws.com
+returner.mqtt_return.topic_prefix: "example/prefix"
+returner.mqtt_return.aws_access_key_id: "aaaaa"
+returner.mqtt_return.aws_secret_access_key: "aaaaa"
 ```
