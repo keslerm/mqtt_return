@@ -47,7 +47,7 @@ returner.mqtt_return.port: 1883
 returner.mqtt_return.topic_prefix: "example/prefix"
 ```
 
-For publishing to AWS IoT Core MQTT broker
+For publishing to AWS IoT Core MQTT broker using boto3 and the iot-data client
 
 ```yaml
 event_return: [mqtt_return]
