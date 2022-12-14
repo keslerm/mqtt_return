@@ -65,7 +65,10 @@ def event_return(events):
         data = event.get("data", "")
 
         # Re-write topic
-        if _options.get("topic_rewrite_regex") and _options.get("topic_rewrite_replace"):
+        if (
+            _options.get("topic_rewrite_regex") is not None
+            and _options.get("topic_rewrite_replace") is not None
+        ):
             topic = re.sub(
                 str(_options.get("topic_rewrite_regex")),
                 str(_options.get("topic_rewrite_replace")),
@@ -73,7 +76,7 @@ def event_return(events):
             )
 
         # Add prefix if specified
-        if _options.get("topic_prefix"):
+        if _options.get("topic_prefix") is not None:
             topic = f"{_options.get('topic_prefix')}/{topic}"
 
         try:
