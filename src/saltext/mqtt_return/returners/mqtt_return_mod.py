@@ -2,6 +2,7 @@
 Salt returner module
 """
 import logging
+import re
 from typing import Any
 
 import handlers.awsiot as awsiot
@@ -34,6 +35,8 @@ def _get_options(ret=None):
         "aws_secret_access_key": "aws_secret_access_key",
         "aws_region": "aws_region",
         "client_id": "client_id",
+        "topic_rewrite_regex": "topic_rewrite_regex",
+        "topic_rewrite_replace": "topic_rewrite_replace",
     }
 
     _options = salt.returners.get_returner_options(
@@ -58,6 +61,14 @@ def event_return(events):
     for event in events:
         topic = event.get("tag", "")
         data = event.get("data", "")
+
+        # Re-write topic
+        if _options.get("topic_rewrite_regex") and _options.get("topic_rewrite_replace"):
+            topic = re.sub(
+                str(_options.get("topic_rewrite_regex")),
+                str(_options.get("topic_rewrite_replace")),
+                topic,
+            )
 
         # Add prefix if specified
         if _options.get("topic_prefix"):

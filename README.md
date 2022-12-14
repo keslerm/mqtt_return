@@ -59,3 +59,15 @@ returner.mqtt_return.topic_prefix: "example/prefix"
 returner.mqtt_return.aws_access_key_id: "aaaaa"
 returner.mqtt_return.aws_secret_access_key: "aaaaa"
 ```
+
+
+## Topic Re-writing
+
+Allows you to re-write the topics with Regex and Python Substr
+
+For example to remove the `salt/` prefix from the topics:
+
+```yaml
+returner.mqtt_return.topic_rewrite_regex: "salt/"
+returner.mqtt_return.topic_rewrite_replace: ""
+```
