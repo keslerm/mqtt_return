@@ -24,6 +24,8 @@ def _get_options(ret=None):
         "port": 1883,
         "output": "mqtt",
         "client_id": "salt-master",
+        # Default this into an empty string to prevent none replace
+        "topic_rewrite_replace": "",
     }
 
     attrs = {
@@ -65,10 +67,7 @@ def event_return(events):
         data = event.get("data", "")
 
         # Re-write topic
-        if (
-            _options.get("topic_rewrite_regex") is not None
-            and _options.get("topic_rewrite_replace") is not None
-        ):
+        if _options.get("topic_rewrite_regex") is not None:
             topic = re.sub(
                 str(_options.get("topic_rewrite_regex")),
                 str(_options.get("topic_rewrite_replace")),
