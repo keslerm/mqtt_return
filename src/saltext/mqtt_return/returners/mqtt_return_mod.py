@@ -30,11 +30,13 @@ def _get_options(ret=None):
         "endpoint": "endpoint",
         "port": "port",
         "output": "output",
-        "topic_prefix": "",
+        "client_id": "client_id",
+        # AWS
         "aws_access_key_id": "aws_access_key_id",
         "aws_secret_access_key": "aws_secret_access_key",
         "aws_region": "aws_region",
-        "client_id": "client_id",
+        # Topic re-writing
+        "topic_prefix": "topic_prefix",
         "topic_rewrite_regex": "topic_rewrite_regex",
         "topic_rewrite_replace": "topic_rewrite_replace",
     }
