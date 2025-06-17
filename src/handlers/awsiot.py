@@ -1,7 +1,7 @@
 import logging
 
 import boto3
-import salt.utils.json
+import json
 
 log = logging.getLogger(__name__)
 
@@ -22,5 +22,5 @@ def publish(opts, topic, data, qos=1):
         topic=f"{topic}",
         qos=qos,
         # retain=False, #depends on boto version
-        payload=bytes(salt.utils.json.dumps(str(data)), "utf-8"),
+        payload=bytes(json.dumps(data), "utf-8"),
     )
