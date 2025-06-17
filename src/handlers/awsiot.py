@@ -22,5 +22,5 @@ def publish(opts, topic, data, qos=1):
         topic=f"{topic}",
         qos=qos,
         # retain=False, #depends on boto version
-        payload=json.dumps(data),
+        payload=json.dumps(str(data)),
     )
