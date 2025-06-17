@@ -79,6 +79,9 @@ def event_return(events):
             topic = f"{_options.get('topic_prefix')}/{topic}"
 
         try:
+            # If the tok parameter exists, remove it. It is a byte slice and thus non serializable
+            data.pop("tok", None)
+
             handler(
                 opts=_options,
                 topic=topic,

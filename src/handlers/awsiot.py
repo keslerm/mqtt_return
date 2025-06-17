@@ -18,12 +18,9 @@ def publish(opts, topic, data, qos=1):
             endpoint_url=opts.get("endpoint"),
         )
 
-    payload = data.pop("token", None)
-
-
     CLIENT.publish(
         topic=f"{topic}",
         qos=qos,
         # retain=False, #depends on boto version
-        payload=json.dumps(payload),
+        payload=json.dumps(data),
     )
