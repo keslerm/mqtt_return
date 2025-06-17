@@ -18,11 +18,6 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y libxml2 libxml2-dev libxslt-dev
-    - uses: actions/cache@v3
-      with:
-        path: ~/.cache/pre-commit
-        key: pre-commit|${{ env.PY }}|${{ hashFiles('.pre-commit-config.yaml') }}
-    - uses: pre-commit/action@v3.0.0
 
   Linux:
     runs-on: ubuntu-latest
