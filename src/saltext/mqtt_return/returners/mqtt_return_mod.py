@@ -88,7 +88,7 @@ def event_return(events):
             topic = f"{_options.get('topic_prefix')}/{topic}"
 
         try:
-            executor.submit_job(HANDLER, _options, topic, _sanitize_for_json(data))
+            executor.submit_job(HANDLER, topic, _sanitize_for_json(data))
         except Exception as error:  # pylint: disable=broad-exception-caught
             log.error(data)
             log.error(error)
