@@ -1,4 +1,5 @@
 import pytest
+
 import saltext.mqtt_return.returners.mqtt_return_mod as mqtt_return_returner
 
 

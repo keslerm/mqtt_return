@@ -1,11 +1,29 @@
-Welcome to mqtt_return Documentation!
-=====================================
+``saltext-mqtt-return``: Integrate Salt with MQTT Returner
+==========================================================
+
+Salt Extension for interacting with MQTT Returner
 
 .. toctree::
   :maxdepth: 2
-  :caption: Contents:
+  :caption: Guides
+  :hidden:
 
-  all.rst
+  topics/installation
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Provided Modules
+  :hidden:
+
+  ref/returners/index
+
+.. toctree::
+  :maxdepth: 2
+  :caption: Reference
+  :hidden:
+
+  changelog
+
 
 Indices and tables
 ==================

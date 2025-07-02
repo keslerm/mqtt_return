@@ -1,18 +1,22 @@
 """
 Salt returner module
 """
+
 import logging
 import re
 from typing import Any
 
-import handlers.awsiot as awsiot
-import handlers.mqtt as mqtt
+import saltext.mqtt_return.utils.mqtt as mqtt
+import saltext.mqtt_return.utils.awsiot as awsiot
 import salt.returners
+
+from saltext.mqtt_return.utils.mqtt_queue import PersistentExecutor
 
 log = logging.getLogger(__name__)
 
 __virtualname__ = "mqtt_return"
 
+executor = PersistentExecutor(max_workers=4)
 
 def __virtual__():
     return __virtualname__
@@ -79,17 +83,28 @@ def event_return(events):
             topic = f"{_options.get('topic_prefix')}/{topic}"
 
         try:
-            # If the tok parameter exists, remove it. It is a byte slice and thus non serializable
-            data.pop("tok", None)
-
-            handler(
-                opts=_options,
-                topic=topic,
-                data=data,
-            )
+            executor.submit_job(handler, _options, topic, _sanitize_for_json(data))
         except Exception as error:
             log.error(data)
             log.error(error)
+
+
+def _sanitize_for_json(obj):
+    """
+    Recursively clean up an object to make it safe for JSON serialization.
+    Non-serializable types are converted to strings.
+    """
+    if isinstance(obj, dict):
+        return {_sanitize_for_json(k): _sanitize_for_json(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [_sanitize_for_json(v) for v in obj]
+    elif isinstance(obj, tuple):
+        return tuple(_sanitize_for_json(v) for v in obj)
+    elif isinstance(obj, (str, int, float, bool)) or obj is None:
+        return obj
+    else:
+        # Convert non-serializable object to string
+        return str(obj)
 
 
 def _get_handler(opts) -> Any:
