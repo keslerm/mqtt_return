@@ -74,6 +74,7 @@ docs = [
   "myst_parser",
   "furo",
   "sphinx-inline-tabs",
+  "looseversion>=1.3.0",
 ]
 docsauto = ["sphinx-autobuild"]
 lint = [
@@ -83,7 +84,7 @@ tests = [
     "pytest>=7.2.0",
     "pytest-salt-factories>=1.0.0",
     "pytest-instafail",
-    "looseversion>=1.3.0"
+    "looseversion>=1.3.0",
 ]
 
 [project.entry-points."salt.loader"]
