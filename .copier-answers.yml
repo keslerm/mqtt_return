@@ -21,9 +21,9 @@ project_name: mqtt-return
 python_requires: '3.9'
 relax_pylint: false
 salt_version: '3006'
-source_url: https://github.com/keslerm/mqtt_return
+source_url: https://github.com/keslerm/saltext-mqtt-return
 ssh_fixtures: false
 summary: Salt Extension for interacting with MQTT Returner
 test_containers: false
-tracker_url: https://github.com/keslerm/mqtt_return/issues
-url: https://github.com/keslerm/mqtt_return
+tracker_url: https://github.com/keslerm/saltext-mqtt-return/issues
+url: https://github.com/keslerm/saltext-mqtt-return

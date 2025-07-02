@@ -1,6 +1,5 @@
 import concurrent.futures
-import threading
-import time
+
 
 class PersistentExecutor:
     def __init__(self, max_workers=4):
@@ -23,7 +22,7 @@ class PersistentExecutor:
                 try:
                     result = future.result()
                     completed.append(result)
-                except Exception as e:
+                except Exception as e:  # pylint: disable=broad-exception-caught
                     completed.append(f"Error: {e}")
             else:
                 remaining.append(future)

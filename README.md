@@ -26,7 +26,7 @@ To get started contributing, first clone this repository (or your fork):
 
 ```bash
 # Clone the repo
-git clone --origin upstream git@github.com:keslerm/mqtt_return.git
+git clone --origin upstream git@github.com:keslerm/saltext-mqtt-return.git
 
 # Change to the repo dir
 cd saltext-mqtt-return
@@ -100,7 +100,7 @@ appreciate every contribution!
 [first-steps]: https://salt-extensions.github.io/salt-extension-copier/topics/creation.html#initialize-the-python-virtual-environment
 [submitting-pr]: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork
 [direnv]: https://direnv.net
-[issues]: https://github.com/keslerm/mqtt_return/issues
-[PRs]: https://github.com/keslerm/mqtt_return/pulls
-[discussions]: https://github.com/keslerm/mqtt_return/discussions
+[issues]: https://github.com/keslerm/saltext-mqtt-return/issues
+[PRs]: https://github.com/keslerm/saltext-mqtt-return/pulls
+[discussions]: https://github.com/keslerm/saltext-mqtt-return/discussions
 [comments]: https://conventionalcomments.org/

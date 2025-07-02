@@ -6,17 +6,20 @@ import logging
 import re
 from typing import Any
 
-import saltext.mqtt_return.utils.mqtt as mqtt
-import saltext.mqtt_return.utils.awsiot as awsiot
 import salt.returners
 
+from saltext.mqtt_return.utils.awsiot import AWSIoTHandler
+from saltext.mqtt_return.utils.mqtt import MQTTHandler
 from saltext.mqtt_return.utils.mqtt_queue import PersistentExecutor
 
 log = logging.getLogger(__name__)
 
 __virtualname__ = "mqtt_return"
 
+HANDLER = None
+
 executor = PersistentExecutor(max_workers=4)
+
 
 def __virtual__():
     return __virtualname__
@@ -62,9 +65,11 @@ def _get_options(ret=None):
 
 
 def event_return(events):
+    global HANDLER  # pylint: disable=global-statement
     _options = _get_options()
 
-    handler = _get_handler(_options)
+    if HANDLER is None:
+        HANDLER = _get_handler(_options)
 
     for event in events:
         topic = event.get("tag", "")
@@ -83,8 +88,8 @@ def event_return(events):
             topic = f"{_options.get('topic_prefix')}/{topic}"
 
         try:
-            executor.submit_job(handler, _options, topic, _sanitize_for_json(data))
-        except Exception as error:
+            executor.submit_job(HANDLER, _options, topic, _sanitize_for_json(data))
+        except Exception as error:  # pylint: disable=broad-exception-caught
             log.error(data)
             log.error(error)
 
@@ -96,19 +101,19 @@ def _sanitize_for_json(obj):
     """
     if isinstance(obj, dict):
         return {_sanitize_for_json(k): _sanitize_for_json(v) for k, v in obj.items()}
-    elif isinstance(obj, list):
+    if isinstance(obj, list):
         return [_sanitize_for_json(v) for v in obj]
-    elif isinstance(obj, tuple):
+    if isinstance(obj, tuple):
         return tuple(_sanitize_for_json(v) for v in obj)
-    elif isinstance(obj, (str, int, float, bool)) or obj is None:
+    if isinstance(obj, (str, int, float, bool)) or obj is None:
         return obj
-    else:
-        # Convert non-serializable object to string
-        return str(obj)
+    return str(obj)
 
 
 def _get_handler(opts) -> Any:
     if opts.get("output") == "mqtt":
-        return mqtt.publish
-    elif opts.get("output") == "awsiot":
-        return awsiot.publish
+        return MQTTHandler(opts).publish
+    if opts.get("output") == "awsiot":
+        return AWSIoTHandler(opts).publish
+
+    raise RuntimeError(f"Unsupported handler: {opts.get('output')}")

@@ -16,6 +16,7 @@ Salt Extension for interacting with MQTT Returner
   :hidden:
 
   ref/returners/index
+  ref/utils/index
 
 .. toctree::
   :maxdepth: 2
