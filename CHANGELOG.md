@@ -4,6 +4,13 @@ This project uses [Semantic Versioning](https://semver.org/) - MAJOR.MINOR.PATCH
 
 # Changelog
 
+## 1.3.2 (2025-07-21)
+
+
+### Fixed
+
+- Fix memory leak in persistent executor [#6](https://github.com/keslerm/saltext-mqtt-return/issues/6)
+
 ## 1.3.1 (2025-07-02)
 
 
