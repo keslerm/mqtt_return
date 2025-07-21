@@ -9,6 +9,7 @@ Salt Extension for interacting with MQTT Returner
   :hidden:
 
   topics/installation
+  topics/quick_start
 
 .. toctree::
   :maxdepth: 2
